@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
@@ -19,6 +20,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public MovieAdapter(Context context, List<Movie> movieList) {
         this.context = context;
         this.movieList = movieList;
+    }
+
+    // Hàm mới: Dùng để cập nhật danh sách khi tìm kiếm
+    public void filterList(ArrayList<Movie> filteredList) {
+        this.movieList = filteredList;
+        notifyDataSetChanged(); // Làm mới giao diện
     }
 
     @NonNull
@@ -32,13 +39,15 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie movie = movieList.get(position);
         holder.tvTitle.setText(movie.getTitle());
-        holder.tvRating.setText(movie.rating);
-        // Ở đây set ảnh tĩnh để test, thực tế dùng Glide
+        holder.tvRating.setText(movie.getRating()); // Đảm bảo class Movie có getRating()
+
+        // Hiển thị ảnh
         holder.imgMovie.setImageResource(movie.getImageResId());
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("object", movie); // Movie phải implements Serializable
+            // Kiểm tra Android version để truyền object (code cũ của bạn đã xử lý hoặc bỏ qua warning)
+            intent.putExtra("object", movie);
             context.startActivity(intent);
         });
     }
