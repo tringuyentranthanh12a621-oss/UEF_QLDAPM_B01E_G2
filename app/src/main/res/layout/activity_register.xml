@@ -4,32 +4,36 @@
     android:layout_height="match_parent"
     android:background="@color/dark_bg"
     android:orientation="vertical"
-    android:gravity="center_vertical"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:gravity="center_vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome Back"
+        android:text="Create Account"
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sign in to continue"
-        android:textColor="@color/text_grey"
-        android:textSize="16sp"
-        android:layout_marginBottom="40dp"/>
+        android:layout_marginBottom="32dp"/>
 
     <EditText
-        android:id="@+id/edtEmailLogin"
+        android:id="@+id/edtName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/bg_input_field"
-        android:hint="Email or Username"
+        android:hint="Full Name"
+        android:inputType="textPersonName"
+        android:paddingHorizontal="16dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/text_hint"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/edtEmailReg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_input_field"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:paddingHorizontal="16dp"
         android:textColor="@color/white"
@@ -37,7 +41,7 @@
         android:layout_marginBottom="16dp"/>
 
     <EditText
-        android:id="@+id/edtPasswordLogin"
+        android:id="@+id/edtPasswordReg"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/bg_input_field"
@@ -46,23 +50,35 @@
         android:paddingHorizontal="16dp"
         android:textColor="@color/white"
         android:textColorHint="@color/text_hint"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/edtRePasswordReg"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_input_field"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:paddingHorizontal="16dp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/text_hint"
         android:layout_marginBottom="32dp"/>
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:backgroundTint="@color/orange_main"
-        android:text="Login"
+        android:text="Sign Up"
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"/>
 
     <TextView
-        android:id="@+id/tvGoToRegister"
+        android:id="@+id/tvGoToLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Don't have an account? Sign Up"
+        android:text="Already have an account? Login"
         android:textColor="@color/orange_main"
         android:gravity="center"
         android:padding="16dp"

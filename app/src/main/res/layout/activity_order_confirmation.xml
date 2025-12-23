@@ -14,7 +14,8 @@
         android:src="@drawable/ic_launcher_foreground"
         android:rotation="180"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,16 +49,18 @@
         app:layout_constraintTop_toBottomOf="@id/tvOrderMovieTitle">
 
         <TextView
+            android:id="@+id/tvOrderCinema"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cinema: Eurasia Cinema7"
+            android:text="Cinema Name"
             android:textColor="@color/text_grey"
             android:layout_marginBottom="8dp"/>
 
         <TextView
+            android:id="@+id/tvOrderDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date: 6 April 2022, 14:40"
+            android:text="Date | Time"
             android:textColor="@color/text_grey"
             android:layout_marginBottom="8dp"/>
 
@@ -82,7 +85,7 @@
         android:id="@+id/tvOrderTotal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total: 0 T"
+        android:text="Total: 0 ₸"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -98,8 +101,10 @@
         android:text="Pay"
         android:textColor="@color/white"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:padding="14dp"
         android:layout_marginBottom="16dp"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

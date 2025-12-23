@@ -17,8 +17,9 @@
         <ImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@mipmap/ic_launcher_round"/>
-
+            android:src="@drawable/logo"
+            android:background="@drawable/bg_input_field"
+            android:backgroundTint="#808080"/>
         <LinearLayout
             android:id="@+id/layoutLocation"
             android:layout_width="wrap_content"
@@ -117,7 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/ic_launcher_background"
+            android:background="@drawable/bg_input_field"
             android:backgroundTint="#25293E"
             android:hint="Type movie name..."
             android:textColorHint="#8C8C8C"

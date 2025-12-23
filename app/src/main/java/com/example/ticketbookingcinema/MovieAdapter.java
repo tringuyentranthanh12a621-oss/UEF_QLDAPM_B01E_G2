@@ -22,10 +22,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         this.movieList = movieList;
     }
 
-    // Hàm mới: Dùng để cập nhật danh sách khi tìm kiếm
     public void filterList(ArrayList<Movie> filteredList) {
         this.movieList = filteredList;
-        notifyDataSetChanged(); // Làm mới giao diện
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -39,14 +38,30 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     public void onBindViewHolder(@NonNull MovieViewHolder holder, int position) {
         Movie movie = movieList.get(position);
         holder.tvTitle.setText(movie.getTitle());
-        holder.tvRating.setText(movie.getRating()); // Đảm bảo class Movie có getRating()
+        holder.tvRating.setText(movie.getRating());
 
-        // Hiển thị ảnh
-        holder.imgMovie.setImageResource(movie.getImageResId());
+        // --- CẬP NHẬT LOGIC HIỂN THỊ ẢNH TỪ FIREBASE ---
+
+        // 1. Lấy tên file ảnh (ví dụ: "the_batman") từ object Movie
+        String picUrl = movie.getPicUrl();
+
+        // 2. Tìm ID của ảnh trong thư mục drawable dựa trên tên
+        // getIdentifier("tên_ảnh", "kiểu_thư_mục", "tên_package")
+        int drawableResourceId = holder.itemView.getContext().getResources()
+                .getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+
+        // 3. Hiển thị ảnh
+        if (drawableResourceId > 0) {
+            // Nếu tìm thấy ảnh
+            holder.imgMovie.setImageResource(drawableResourceId);
+        } else {
+            // Nếu không tìm thấy (hoặc tên ảnh trên Firebase bị sai), hiển thị ảnh mặc định
+            holder.imgMovie.setImageResource(R.drawable.ic_launcher_background);
+        }
+        // --------------------------------------------------
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
-            // Kiểm tra Android version để truyền object (code cũ của bạn đã xử lý hoặc bỏ qua warning)
             intent.putExtra("object", movie);
             context.startActivity(intent);
         });

@@ -16,58 +16,63 @@ public class TicketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket);
 
-        // 1. Nhận dữ liệu từ Intent
-        // (Lưu ý: Nếu bên OrderConfirmation chưa truyền "totalPrice", thì ở đây sẽ hiện 0 T)
-        String movieTitle = getIntent().getStringExtra("movieTitle");
-        ArrayList<String> seats = getIntent().getStringArrayListExtra("seats");
-
-        // Bạn có thể update OrderConfirmationActivity để truyền thêm totalPrice sang nếu muốn
-        // int cost = getIntent().getIntExtra("totalPrice", 0);
+        // 1. Nhận dữ liệu
+        Intent intent = getIntent();
+        String movieTitle = intent.getStringExtra("movieTitle");
+        String cinemaName = intent.getStringExtra("cinemaName");
+        String date = intent.getStringExtra("date");
+        String time = intent.getStringExtra("time");
+        ArrayList<String> seats = intent.getStringArrayListExtra("seats");
 
         // 2. Ánh xạ View
         TextView tvTitle = findViewById(R.id.tvTicketMovieTitle);
+        TextView tvCinema = findViewById(R.id.tvTicketCinema);
+        TextView tvDate = findViewById(R.id.tvTicketDate);
         TextView tvSeats = findViewById(R.id.tvTicketSeats);
-        // TextView tvCost = findViewById(R.id.tvTicketCost); // Nếu muốn set giá
+
+        // Đây là cái ảnh đang bị màu xanh, ta cần ánh xạ nó để set ảnh phim
+        ImageView imgTicketQR = findViewById(R.id.imgTicketQR);
+        // LƯU Ý: Bạn cần mở file activity_ticket.xml và đặt ID cho ImageView là: android:id="@+id/imgTicketQR"
 
         ImageView btnClose = findViewById(R.id.btnCloseTicket);
-        Button btnHome = findViewById(R.id.btnHome); // Nút màu cam (Send)
-        Button btnRefund = findViewById(R.id.btnRefund); // Nút màu tối
+        Button btnHome = findViewById(R.id.btnHome);
 
-        // 3. Hiển thị dữ liệu
-        if (movieTitle != null) {
-            tvTitle.setText(movieTitle);
-        }
+        // 3. Hiển thị dữ liệu chữ
+        if (movieTitle != null) tvTitle.setText(movieTitle);
+        if (cinemaName != null) tvCinema.setText(cinemaName);
+        if (date != null && time != null) tvDate.setText(date + " • " + time);
 
         if (seats != null) {
-            // Xử lý chuỗi hiển thị ghế cho đẹp
-            String displaySeats = seats.toString().replace("[", "").replace("]", "");
-            tvSeats.setText(displaySeats);
+            String seatsStr = seats.toString().replace("[", "").replace("]", "");
+            tvSeats.setText(seatsStr);
         }
 
-        // tvCost.setText(cost + " T (paid)"); // Mở comment nếu bạn đã truyền giá sang
+        // --- 4. LOGIC HIỂN THỊ ẢNH PHIM TRÊN VÉ ---
+        if (movieTitle != null) {
+            // Quy tắc: "Spider Man" -> "spider_man"
+            String imgName = movieTitle.toLowerCase().replace(" ", "_");
 
-        // 4. Xử lý sự kiện click
+            // Tìm ID của ảnh trong drawable
+            int resId = getResources().getIdentifier(imgName, "drawable", getPackageName());
 
-        // Nút Đóng (X) -> Về màn hình chính
+            if (resId > 0) {
+                imgTicketQR.setImageResource(resId); // Set ảnh phim
+                imgTicketQR.setScaleType(ImageView.ScaleType.CENTER_CROP); // Cắt ảnh cho đẹp
+            }
+        }
+        // ---------------------------------------------
+
+        // 5. Xử lý nút bấm
         btnClose.setOnClickListener(v -> returnToMain());
 
-        // Nút Send (Home) -> Thông báo giả lập gửi vé rồi về màn hình chính
         btnHome.setOnClickListener(v -> {
-            Toast.makeText(this, "Ticket sent to your email!", Toast.LENGTH_SHORT).show();
-            returnToMain();
-        });
-
-        // Nút Refund -> Thông báo giả lập
-        btnRefund.setOnClickListener(v -> {
-            Toast.makeText(this, "Refund request sent!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Ticket saved!", Toast.LENGTH_SHORT).show();
             returnToMain();
         });
     }
 
-    // Hàm quay về màn hình chính an toàn
     private void returnToMain() {
         Intent intent = new Intent(TicketActivity.this, MainActivity.class);
-        // Xóa sạch lịch sử các trang đặt vé để không back lại được
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();

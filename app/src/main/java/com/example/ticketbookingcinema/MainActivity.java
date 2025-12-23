@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
     MovieAdapter adapter;
     ArrayList<Movie> movies;
 
-    // Khai báo các biến giao diện mới
+    // Khai báo Firestore
+    FirebaseFirestore db;
+
+    // Biến giao diện
     TextView tvLocation, tvLanguage;
     LinearLayout layoutLocation, layoutLanguage;
     ImageView btnSearch;
@@ -32,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Khởi tạo Firestore
+        db = FirebaseFirestore.getInstance();
 
         // --- ÁNH XẠ VIEW ---
         rvMovies = findViewById(R.id.rvMovies);
@@ -43,11 +54,14 @@ public class MainActivity extends AppCompatActivity {
         edtSearch = findViewById(R.id.edtSearchMovie);
         Button btnProfile = findViewById(R.id.btnProfile);
 
-        // --- KHỞI TẠO DỮ LIỆU & ADAPTER ---
-        initData();
+        // --- CẤU HÌNH RECYCLERVIEW ---
+        movies = new ArrayList<>();
         adapter = new MovieAdapter(this, movies);
         rvMovies.setLayoutManager(new GridLayoutManager(this, 2));
         rvMovies.setAdapter(adapter);
+
+        // --- LẤY DỮ LIỆU TỪ FIREBASE ---
+        getMoviesFromFirestore();
 
         // --- 1. XỬ LÝ NÚT PROFILE ---
         if (btnProfile != null) {
@@ -58,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // --- 2. TÌM KIẾM PHIM ---
-        // Bấm kính lúp -> Ẩn/Hiện ô nhập
         btnSearch.setOnClickListener(v -> {
             if (edtSearch.getVisibility() == View.VISIBLE) {
                 edtSearch.setVisibility(View.GONE);
@@ -67,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Lắng nghe khi người dùng gõ chữ
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -75,15 +87,38 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
             public void afterTextChanged(Editable s) {
-                filter(s.toString()); // Gọi hàm lọc
+                filter(s.toString());
             }
         });
 
-        // --- 3. ĐỔI ĐỊA ĐIỂM ---
+        // --- 3. ĐỔI ĐỊA ĐIỂM & NGÔN NGỮ ---
         layoutLocation.setOnClickListener(v -> showChangeLocationDialog());
-
-        // --- 4. ĐỔI NGÔN NGỮ ---
         layoutLanguage.setOnClickListener(v -> showChangeLanguageDialog());
+    }
+
+    // --- HÀM LẤY DỮ LIỆU TỪ FIREBASE ---
+    private void getMoviesFromFirestore() {
+        db.collection("movies")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        movies.clear(); // Xóa dữ liệu cũ (nếu có)
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            // Firestore tự động map JSON sang Object Movie
+                            // Yêu cầu: Class Movie phải có Constructor rỗng và trùng tên trường
+                            try {
+                                Movie movie = document.toObject(Movie.class);
+                                movies.add(movie);
+                            } catch (Exception e) {
+                                Log.e("FirestoreError", "Error converting document", e);
+                            }
+                        }
+                        // Cập nhật giao diện sau khi tải xong
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Error getting movies: " + task.getException(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     // Hàm lọc danh sách phim
@@ -94,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
                 filteredList.add(item);
             }
         }
-        // Gọi hàm cập nhật bên Adapter
         adapter.filterList(filteredList);
     }
 
@@ -123,15 +157,5 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Language changed to " + selected, Toast.LENGTH_SHORT).show();
         });
         builder.show();
-    }
-
-    private void initData() {
-        movies = new ArrayList<>();
-        // LƯU Ý: Đảm bảo bạn đã copy ảnh (the_batman.jpg, etc.) vào res/drawable
-        // Nếu chưa có ảnh, hãy đổi tạm thành R.drawable.ic_launcher_background để chạy thử
-        movies.add(new Movie("The Batman", "Action", "2h 55m", "8.3", R.drawable.the_batman));
-        movies.add(new Movie("Uncharted", "Adventure", "1h 56m", "7.9", R.drawable.uncharted));
-        movies.add(new Movie("Spider-Man", "Action", "2h 28m", "8.1", R.drawable.spider_man));
-        movies.add(new Movie("Turning Red", "Comedy", "1h 40m", "7.1", R.drawable.turning_red));
     }
 }

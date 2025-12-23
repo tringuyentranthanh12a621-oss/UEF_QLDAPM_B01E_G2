@@ -1,39 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_bg"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/dark_bg">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginBottom="20dp">
-
+        android:layout_height="56dp"
+        android:padding="10dp">
         <ImageView
             android:id="@+id/btnBackUser"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/ic_launcher_foreground"
             android:rotation="180"
-            app:tint="@color/white"/>
-
+            android:layout_centerVertical="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="User Management"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginStart="16dp"/>
-    </LinearLayout>
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvUsers"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent"
+        android:padding="10dp"/>
 </LinearLayout>

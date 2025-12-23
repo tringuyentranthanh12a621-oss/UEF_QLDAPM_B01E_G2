@@ -1,11 +1,22 @@
 package com.example.ticketbookingcinema;
 
 public class User {
-    String name, phone;
-    public User(String name, String phone) {
-        this.name = name;
-        this.phone = phone;
+    private String fullName;
+    private String email;
+    private String role; // "admin" hoặc "client"
+
+    // 1. Constructor rỗng (BẮT BUỘC cho Firestore)
+    public User() {
     }
-    public String getName() { return name; }
-    public String getPhone() { return phone; }
+
+    // 2. Constructor đầy đủ
+    public User(String fullName, String email, String role) {
+        this.fullName = fullName;
+        this.email = email;
+        this.role = role;
+    }
+
+    public String getFullName() { return fullName; }
+    public String getEmail() { return email; }
+    public String getRole() { return role; }
 }

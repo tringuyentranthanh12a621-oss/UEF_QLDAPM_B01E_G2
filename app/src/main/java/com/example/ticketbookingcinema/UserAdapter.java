@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
-    List<User> userList;
+
+    private List<User> userList;
 
     public UserAdapter(List<User> userList) {
         this.userList = userList;
@@ -25,19 +26,24 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userList.get(position);
-        holder.tvName.setText(user.getName());
-        holder.tvPhone.setText(user.getPhone());
+        holder.tvName.setText(user.getFullName());
+        holder.tvEmail.setText(user.getEmail());
+        holder.tvRole.setText("Role: " + user.getRole());
     }
 
     @Override
-    public int getItemCount() { return userList.size(); }
+    public int getItemCount() {
+        return userList.size();
+    }
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvPhone;
+        TextView tvName, tvEmail, tvRole;
+
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvUserName);
-            tvPhone = itemView.findViewById(R.id.tvUserPhone);
+            tvEmail = itemView.findViewById(R.id.tvUserEmail);
+            tvRole = itemView.findViewById(R.id.tvUserRole);
         }
     }
 }

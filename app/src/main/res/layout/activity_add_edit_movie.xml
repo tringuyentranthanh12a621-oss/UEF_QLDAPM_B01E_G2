@@ -2,100 +2,131 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_bg">
+    android:background="@color/dark_bg"
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="24dp">
+        android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvHeaderMovie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Movie Details"
+            android:text="Add New Movie"
             android:textColor="@color/white"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:gravity="center"
             android:layout_marginBottom="24dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Title"
-            android:textColor="@color/text_grey"/>
         <EditText
             android:id="@+id/edtMovieTitle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/ic_launcher_background"
-            android:hint="Ex: The Batman"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:layout_marginBottom="16dp"/>
+            android:background="@drawable/bg_input_field"
+            android:backgroundTint="#25293E"
+            android:hint="Movie Title (e.g. The Batman)"
+            android:textColor="@color/white"
+            android:textColorHint="#505050"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="12dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Category"
-            android:textColor="@color/text_grey"/>
         <EditText
-            android:id="@+id/edtCategory"
+            android:id="@+id/edtImageName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/ic_launcher_background"
-            android:hint="Ex: Action, Drama"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:layout_marginBottom="16dp"/>
-
+            android:background="@drawable/bg_input_field"
+            android:backgroundTint="#25293E"
+            android:hint="Image Name (e.g. the_batman)"
+            android:textColor="@color/white"
+            android:textColorHint="#505050"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="12dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Duration"
-            android:textColor="@color/text_grey"/>
-        <EditText
-            android:id="@+id/edtDuration"
+            android:text="* Must match file name in res/drawable"
+            android:textColor="@color/orange_main"
+            android:textSize="12sp"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/ic_launcher_background"
-            android:hint="Ex: 2h 30m"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:layout_marginBottom="16dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rating (IMDb)"
-            android:textColor="@color/text_grey"/>
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/edtCategory"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input_field"
+                android:backgroundTint="#25293E"
+                android:hint="Genre (Action)"
+                android:textColor="@color/white"
+                android:textColorHint="#505050"
+                android:paddingHorizontal="16dp"
+                android:layout_marginEnd="8dp"/>
+            <EditText
+                android:id="@+id/edtDuration"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:background="@drawable/bg_input_field"
+                android:backgroundTint="#25293E"
+                android:hint="Time (2h 30m)"
+                android:textColor="@color/white"
+                android:textColorHint="#505050"
+                android:paddingHorizontal="16dp"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
         <EditText
             android:id="@+id/edtRating"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/ic_launcher_background"
-            android:hint="Ex: 8.5"
-            android:inputType="numberDecimal"
-            android:textColor="@color/black"
-            android:padding="10dp"
-            android:layout_marginBottom="32dp"/>
+            android:background="@drawable/bg_input_field"
+            android:backgroundTint="#25293E"
+            android:hint="Rating (e.g. 8.5)"
+            android:textColor="@color/white"
+            android:textColorHint="#505050"
+            android:paddingHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:inputType="numberDecimal"/>
+
+        <EditText
+            android:id="@+id/edtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@drawable/bg_input_field"
+            android:backgroundTint="#25293E"
+            android:hint="Movie Description..."
+            android:textColor="@color/white"
+            android:textColorHint="#505050"
+            android:padding="16dp"
+            android:gravity="top"
+            android:layout_marginTop="12dp"/>
 
         <Button
             android:id="@+id/btnSaveMovie"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="Save Movie"
             android:backgroundTint="@color/orange_main"
             android:textColor="@color/white"
-            android:layout_marginBottom="16dp"/>
+            android:textStyle="bold"
+            android:layout_marginTop="30dp"/>
 
         <Button
             android:id="@+id/btnDeleteMovie"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="Delete Movie"
             android:backgroundTint="#FF4444"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:layout_marginTop="12dp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 </ScrollView>

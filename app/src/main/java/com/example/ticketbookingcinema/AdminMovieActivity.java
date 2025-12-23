@@ -2,17 +2,19 @@ package com.example.ticketbookingcinema;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager; // Hoặc GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 
 public class AdminMovieActivity extends AppCompatActivity {
     RecyclerView rvMovies;
-    MovieAdapter adapter; // Tái sử dụng Adapter cũ cho nhanh
-    ArrayList<Movie> movies;
+    AdminMovieAdapter adapter; // SỬA: Dùng AdminMovieAdapter thay vì MovieAdapter
+    ArrayList<Movie> movieList;
+    FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,28 +24,47 @@ public class AdminMovieActivity extends AppCompatActivity {
         // Nút Back
         findViewById(R.id.btnBackAdminMovie).setOnClickListener(v -> finish());
 
-        // Nút Thêm phim mới (+)
-        FloatingActionButton fab = findViewById(R.id.fabAddMovie);
-        fab.setOnClickListener(v -> {
+        // Nút thêm phim mới (+)
+        FloatingActionButton fabAdd = findViewById(R.id.fabAddMovie);
+        fabAdd.setOnClickListener(v -> {
             Intent intent = new Intent(AdminMovieActivity.this, AddEditMovieActivity.class);
             startActivity(intent);
         });
 
-        // Setup danh sách
+        // Setup RecyclerView
         rvMovies = findViewById(R.id.rvAdminMovies);
-        initData(); // Dữ liệu giả
+        movieList = new ArrayList<>();
 
-        // Lưu ý: MovieAdapter cũ khi click sẽ mở DetailActivity của Client.
-        // Để đơn giản, ta tạm dùng nó. Nếu muốn click vào để Sửa (Edit), ta cần sửa Adapter sau.
-        adapter = new MovieAdapter(this, movies);
+        // SỬA: Khởi tạo AdminMovieAdapter
+        adapter = new AdminMovieAdapter(this, movieList);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
+
+        db = FirebaseFirestore.getInstance();
     }
 
-    private void initData() {
-        movies = new ArrayList<>();
-        movies.add(new Movie("The Batman", "Action", "2h 55m", "8.3", R.drawable.ic_launcher_background));
-        movies.add(new Movie("Uncharted", "Adventure", "1h 56m", "7.9", R.drawable.ic_launcher_background));
-        // Thêm các phim khác...
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadMovies(); // Tải lại danh sách khi quay lại màn hình này
+    }
+
+    private void loadMovies() {
+        db.collection("movies").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                movieList.clear();
+                for (QueryDocumentSnapshot doc : task.getResult()) {
+                    // Chuyển đổi dữ liệu JSON sang Object Movie
+                    Movie m = doc.toObject(Movie.class);
+
+                    // QUAN TRỌNG: Lấy ID của document và gán vào object Movie
+                    // (Để sau này biết cần sửa/xóa document nào)
+                    m.setId(doc.getId());
+
+                    movieList.add(m);
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 }
