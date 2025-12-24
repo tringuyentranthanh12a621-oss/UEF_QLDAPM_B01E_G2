@@ -81,8 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     } else {
-                        // Đăng nhập thất bại
-                        Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        // Lấy thông báo lỗi chi tiết từ Firebase
+                        String error = task.getException().getMessage();
+                        Toast.makeText(LoginActivity.this, "Lỗi: " + error, Toast.LENGTH_LONG).show();
                     }
                 });
     }

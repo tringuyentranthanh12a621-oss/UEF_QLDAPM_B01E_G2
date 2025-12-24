@@ -40,25 +40,28 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         holder.tvTitle.setText(movie.getTitle());
         holder.tvRating.setText(movie.getRating());
 
-        // --- CẬP NHẬT LOGIC HIỂN THỊ ẢNH TỪ FIREBASE ---
-
-        // 1. Lấy tên file ảnh (ví dụ: "the_batman") từ object Movie
+        // --- BẮT ĐẦU ĐOẠN CODE SỬA LỖI (Quan trọng) ---
         String picUrl = movie.getPicUrl();
+        int drawableResourceId = 0;
 
-        // 2. Tìm ID của ảnh trong thư mục drawable dựa trên tên
-        // getIdentifier("tên_ảnh", "kiểu_thư_mục", "tên_package")
-        int drawableResourceId = holder.itemView.getContext().getResources()
-                .getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+        // 1. Kiểm tra kỹ: Chỉ tìm ảnh nếu picUrl KHÔNG null và KHÔNG rỗng
+        if (picUrl != null && !picUrl.isEmpty()) {
+            try {
+                drawableResourceId = holder.itemView.getContext().getResources()
+                        .getIdentifier(picUrl, "drawable", holder.itemView.getContext().getPackageName());
+            } catch (Exception e) {
+                e.printStackTrace(); // Nếu tên ảnh sai cú pháp, bỏ qua lỗi chứ không crash
+            }
+        }
 
-        // 3. Hiển thị ảnh
+        // 2. Hiển thị ảnh
         if (drawableResourceId > 0) {
-            // Nếu tìm thấy ảnh
             holder.imgMovie.setImageResource(drawableResourceId);
         } else {
-            // Nếu không tìm thấy (hoặc tên ảnh trên Firebase bị sai), hiển thị ảnh mặc định
+            // Nếu picUrl bị null hoặc không tìm thấy ảnh -> Hiện ảnh mặc định
             holder.imgMovie.setImageResource(R.drawable.ic_launcher_background);
         }
-        // --------------------------------------------------
+        // --- KẾT THÚC ĐOẠN CODE SỬA LỖI ---
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);

@@ -69,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             // Gọi hàm đăng ký có truyền thêm Name
             registerUser(email, pass, name);
+            System.out.println(email+ " "+ pass + "" + name);
         });
     }
 
@@ -79,6 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         // Lấy UID (User ID) vừa được tạo ra
                         String userId = mAuth.getCurrentUser().getUid();
+                        System.out.println(userId);
 
                         // 2. Chuẩn bị dữ liệu để lưu vào Firestore
                         Map<String, Object> user = new HashMap<>();
