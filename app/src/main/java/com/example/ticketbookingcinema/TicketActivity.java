@@ -29,15 +29,11 @@ public class TicketActivity extends AppCompatActivity {
         TextView tvCinema = findViewById(R.id.tvTicketCinema);
         TextView tvDate = findViewById(R.id.tvTicketDate);
         TextView tvSeats = findViewById(R.id.tvTicketSeats);
-
-        // Đây là cái ảnh đang bị màu xanh, ta cần ánh xạ nó để set ảnh phim
         ImageView imgTicketQR = findViewById(R.id.imgTicketQR);
-        // LƯU Ý: Bạn cần mở file activity_ticket.xml và đặt ID cho ImageView là: android:id="@+id/imgTicketQR"
-
         ImageView btnClose = findViewById(R.id.btnCloseTicket);
         Button btnHome = findViewById(R.id.btnHome);
 
-        // 3. Hiển thị dữ liệu chữ
+        // 3. Hiển thị dữ liệu
         if (movieTitle != null) tvTitle.setText(movieTitle);
         if (cinemaName != null) tvCinema.setText(cinemaName);
         if (date != null && time != null) tvDate.setText(date + " • " + time);
@@ -47,26 +43,29 @@ public class TicketActivity extends AppCompatActivity {
             tvSeats.setText(seatsStr);
         }
 
-        // --- 4. LOGIC HIỂN THỊ ẢNH PHIM TRÊN VÉ ---
+        // --- LOGIC HIỂN THỊ ẢNH PHIM ---
         if (movieTitle != null) {
-            // Quy tắc: "Spider Man" -> "spider_man"
+            // Chuyển tên phim thành tên file ảnh (ví dụ: "The Batman" -> "the_batman")
             String imgName = movieTitle.toLowerCase().replace(" ", "_");
 
-            // Tìm ID của ảnh trong drawable
+            // Tìm ID ảnh trong drawable
             int resId = getResources().getIdentifier(imgName, "drawable", getPackageName());
 
             if (resId > 0) {
-                imgTicketQR.setImageResource(resId); // Set ảnh phim
-                imgTicketQR.setScaleType(ImageView.ScaleType.CENTER_CROP); // Cắt ảnh cho đẹp
+                imgTicketQR.setImageResource(resId);
+                imgTicketQR.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            } else {
+                // Nếu không tìm thấy ảnh phim, set ảnh mặc định
+                imgTicketQR.setImageResource(R.drawable.ic_launcher_background);
             }
         }
-        // ---------------------------------------------
 
-        // 5. Xử lý nút bấm
+        // 4. Xử lý nút bấm
         btnClose.setOnClickListener(v -> returnToMain());
 
         btnHome.setOnClickListener(v -> {
-            Toast.makeText(this, "Ticket saved!", Toast.LENGTH_SHORT).show();
+            // SỬA: Dùng getString() để hiện thông báo đa ngôn ngữ
+            Toast.makeText(this, getString(R.string.ticket_saved), Toast.LENGTH_SHORT).show();
             returnToMain();
         });
     }

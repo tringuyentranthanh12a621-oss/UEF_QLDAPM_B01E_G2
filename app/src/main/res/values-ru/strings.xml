@@ -1,0 +1,99 @@
+<resources>
+    <string name="app_name">Билеты в кино</string>
+
+    <string name="now_in_cinemas">Сейчас в кино</string>
+    <string name="coming_soon">Скоро в кино</string>
+    <string name="search_hint">Поиск фильмов...</string>
+    <string name="choose_city">Выберите город</string>
+    <string name="choose_language">Выберите язык</string>
+    <string name="profile">Профиль</string>
+    <string name="welcome_back">С возвращением</string>
+    <string name="sign_in_continue">Войдите, чтобы продолжить</string>
+    <string name="login">Войти</string>
+    <string name="register">Регистрация</string>
+    <string name="email">Эл. почта</string>
+    <string name="password">Пароль</string>
+    <string name="full_name">ФИО</string>
+    <string name="confirm_password">Повторите пароль</string>
+    <string name="dont_have_account">Нет аккаунта? Зарегистрироваться</string>
+    <string name="already_have_account">Есть аккаунт? Войти</string>
+    <string name="login_success">Успешный вход</string>
+    <string name="auth_failed">Ошибка аутентификации</string>
+    <string name="tab_about">О фильме</string>
+    <string name="tab_sessions">Сеансы</string>
+    <string name="certificate">Возраст</string>
+    <string name="runtime">Длительность</string>
+    <string name="genre">Жанр</string>
+    <string name="sort_time">Время ↑</string>
+    <string name="by_cinema">По кинотеатру</string>
+    <string name="header_time">Время</string>
+    <string name="header_adult">Взрослый</string>
+    <string name="header_child">Детский</string>
+    <string name="header_student">Студент</string>
+    <string name="select_session">Выбрать сеанс</string>
+    <string name="saved_cards">Сохраненные карты</string>
+    <string name="add_new_card">Добавить карту</string>
+    <string name="payment_history">История платежей</string>
+    <string name="logout">Выйти</string>
+    <string name="no_booking_history">История бронирования пуста.</string>
+    <string name="pay_for_tickets">Оплата билетов</string>
+    <string name="total_colon">Итого:</string>
+    <string name="pay_now">Оплатить</string>
+    <string name="book_ticket">Купить билет</string>
+    <string name="synopsis">Описание</string>
+    <string name="cast">В ролях</string>
+    <string name="select_seat">Выбор мест</string>
+    <string name="confirm_order">Подтверждение</string>
+    <string name="total_price">Итого</string>
+    <string name="checkout">Оплатить</string>
+    <string name="available">Свободно</string>
+    <string name="occupied">Занято</string>
+    <string name="chosen">Выбрано</string>
+
+
+
+        <string name="error_load_history">Ошибка загрузки истории</string>
+        <string name="fill_all_fields">Заполните все поля</string>
+        <string name="password_mismatch">Пароли не совпадают</string>
+        <string name="password_length_error">Пароль должен содержать не менее 6 символов</string>
+        <string name="account_created">Аккаунт успешно создан!</string>
+        <string name="error_save_user">Ошибка сохранения данных: </string>
+        <string name="reg_failed">Ошибка регистрации: </string>
+    <string name="your_eticket">Ваш электронный билет</string>
+    <string name="show_code">Покажите этот код на входе</string>
+    <string name="cinema">Кинотеатр</string>
+    <string name="date_time">Дата и Время</string>
+    <string name="seats">Места</string>
+    <string name="back_home">На главную</string>
+    <string name="cancel_booking">Отменить бронь</string>
+    <string name="ticket_saved">Билет сохранен!</string>
+        <string name="title_add_card">Добавить карту</string>
+        <string name="card_number">Номер карты</string>
+        <string name="card_holder_name">Имя владельца</string>
+        <string name="expiry_date">Срок действия</string>
+        <string name="cvv">CVV</string>
+        <string name="btn_add_card">Добавить</string>
+
+        <string name="title_card_detail">Детали карты</string>
+        <string name="label_card_holder">Владелец</string>
+        <string name="label_expires">Годен до</string>
+        <string name="btn_remove_card">Удалить карту</string>
+        <string name="msg_card_removed">Карта успешно удалена</string>
+        <string name="hint_full_name">ФИО</string>
+
+        <string name="screen">ЭКРАН</string>
+        <string name="select_ticket_type">Выберите тип билета</string>
+        <string name="adult">Взрослый</string>
+        <string name="child">Детский</string>
+        <string name="please_select_seat">Пожалуйста, выберите место</string>
+        <string name="buy_tickets">Купить билеты</string>
+        <string name="buy">Купить</string>
+        <string name="tickets">билетов</string>
+
+    <string name="admin_dashboard">Панель администратора</string>
+    <string name="manage_movies">Управление фильмами</string>
+    <string name="manage_users">Управление пользователями</string>
+    <string name="add_movie">Добавить фильм</string>
+    <string name="save_movie">Сохранить</string>
+    <string name="delete_movie">Удалить</string>
+</resources>

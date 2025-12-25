@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
@@ -24,7 +26,6 @@ public class AdminMovieAdapter extends RecyclerView.Adapter<AdminMovieAdapter.Ad
     @NonNull
     @Override
     public AdminMovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Dùng lại layout item_movie cũ cho tiết kiệm
         View view = LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false);
         return new AdminMovieViewHolder(view);
     }
@@ -36,11 +37,10 @@ public class AdminMovieAdapter extends RecyclerView.Adapter<AdminMovieAdapter.Ad
         holder.tvTitle.setText(movie.getTitle());
         holder.tvRating.setText(movie.getRating());
 
-        // --- ĐOẠN CODE ĐÃ SỬA LỖI ---
+        // --- XỬ LÝ ẢNH (AN TOÀN) ---
         String picUrl = movie.getPicUrl();
         int drawableResourceId = 0;
 
-        // Chỉ tìm ảnh nếu picUrl KHÁC null và KHÁC rỗng
         if (picUrl != null && !picUrl.isEmpty()) {
             try {
                 drawableResourceId = holder.itemView.getContext().getResources()
@@ -50,20 +50,34 @@ public class AdminMovieAdapter extends RecyclerView.Adapter<AdminMovieAdapter.Ad
             }
         }
 
-        // Nếu tìm thấy ảnh thì hiển thị, không thì hiện ảnh mặc định
         if (drawableResourceId > 0) {
             holder.imgMovie.setImageResource(drawableResourceId);
         } else {
-            holder.imgMovie.setImageResource(R.drawable.ic_launcher_background); // Ảnh mặc định tránh crash
+            holder.imgMovie.setImageResource(R.drawable.ic_launcher_background);
         }
         // -----------------------------
 
-        // Sự kiện click chuyển sang trang sửa
+        // 1. NHẤN THƯỜNG -> SỬA PHIM
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, AddEditMovieActivity.class);
             intent.putExtra("movieId", movie.getId());
             intent.putExtra("movieData", movie);
             context.startActivity(intent);
+        });
+
+        // 2. NHẤN GIỮ (LONG CLICK) -> THÊM SUẤT CHIẾU (SCHEDULE)
+        holder.itemView.setOnLongClickListener(v -> {
+            // Chuyển sang màn hình ManageShowtimeActivity
+            // Lưu ý: Bạn cần chắc chắn đã tạo file ManageShowtimeActivity như hướng dẫn trước
+            try {
+                Intent intent = new Intent(context, ManageShowtimeActivity.class);
+                intent.putExtra("movieId", movie.getId());
+                intent.putExtra("movieTitle", movie.getTitle());
+                context.startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(context, "Chưa tạo ManageShowtimeActivity!", Toast.LENGTH_SHORT).show();
+            }
+            return true; // Trả về true để hệ thống biết sự kiện đã được xử lý
         });
     }
 

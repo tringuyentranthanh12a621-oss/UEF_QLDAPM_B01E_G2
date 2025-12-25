@@ -26,23 +26,16 @@ public class SeatSelectionActivity extends AppCompatActivity {
     Button btnBuyTicket;
     TextView tvMovieTitle, tvCinemaName;
 
-    // Firestore
     FirebaseFirestore db;
 
-    // Cấu hình giá
     int priceAdult = 2200;
     int priceChild = 1000;
 
-    // Biến tổng hợp
     int totalPrice = 0;
     int totalTickets = 0;
 
-    // Danh sách ghế đang chọn hiện tại
     List<String> selectedSeats = new ArrayList<>();
-
-    // Danh sách ghế ĐÃ BỊ ĐẶT (lấy từ Firebase)
     List<String> bookedSeats = new ArrayList<>();
-
     Map<String, Integer> seatPrices = new HashMap<>();
 
     String movieTitleStr = "";
@@ -55,34 +48,30 @@ public class SeatSelectionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_seat_selection);
 
-        // Khởi tạo Firestore
         db = FirebaseFirestore.getInstance();
 
-        // 1. Nhận dữ liệu từ Intent
         Intent intent = getIntent();
         movieTitleStr = intent.getStringExtra("movieTitle");
         cinemaNameStr = intent.getStringExtra("cinema");
-        dateStr = intent.getStringExtra("date"); // Ngày chiếu
-        timeStr = intent.getStringExtra("time"); // Giờ chiếu
+        dateStr = intent.getStringExtra("date");
+        timeStr = intent.getStringExtra("time");
 
-        // 2. Ánh xạ View
         gridLayoutSeats = findViewById(R.id.gridLayoutSeats);
         btnBuyTicket = findViewById(R.id.btnBuyTicket);
         tvMovieTitle = findViewById(R.id.tvMovieTitle);
         tvCinemaName = findViewById(R.id.tvCinemaName);
         ImageView btnBack = findViewById(R.id.btnBack);
 
-        // 3. Hiển thị thông tin Header
         if (movieTitleStr != null) tvMovieTitle.setText(movieTitleStr);
         if (cinemaNameStr != null) tvCinemaName.setText(cinemaNameStr);
 
-        // 4. Xử lý logic
+        // Cập nhật text ban đầu cho nút mua vé
+        updateButton();
+
         btnBack.setOnClickListener(v -> finish());
 
-        // Thay vì gọi initSeats() ngay, ta gọi hàm tải dữ liệu từ Firebase trước
         loadBookedSeatsFromFirestore();
 
-        // 5. Sự kiện nút Mua vé
         btnBuyTicket.setOnClickListener(v -> {
             if (totalTickets > 0) {
                 Intent orderIntent = new Intent(SeatSelectionActivity.this, OrderConfirmationActivity.class);
@@ -94,34 +83,30 @@ public class SeatSelectionActivity extends AppCompatActivity {
                 orderIntent.putStringArrayListExtra("seats", (ArrayList<String>) selectedSeats);
                 startActivity(orderIntent);
             } else {
-                Toast.makeText(this, "Please select at least one seat", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.please_select_seat), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    // --- HÀM MỚI: Tải danh sách ghế đã đặt ---
+    @SuppressWarnings("unchecked")
     private void loadBookedSeatsFromFirestore() {
-        // Query: Tìm tất cả đơn hàng trùng Tên Phim + Ngày + Giờ
         db.collection("bookings")
                 .whereEqualTo("movieTitle", movieTitleStr)
-                .whereEqualTo("bookingDate", dateStr) // Lưu ý: Tên trường phải khớp với lúc lưu (step sau)
-                .whereEqualTo("time", timeStr)       // Lưu ý: Tên trường phải khớp
+                .whereEqualTo("bookingDate", dateStr)
+                .whereEqualTo("time", timeStr)
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         bookedSeats.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            // Lấy mảng ghế "seats" từ mỗi đơn hàng
                             List<String> seatsInOrder = (List<String>) document.get("seats");
                             if (seatsInOrder != null) {
                                 bookedSeats.addAll(seatsInOrder);
                             }
                         }
-                        // Sau khi có danh sách ghế đã đặt -> Mới vẽ ghế
                         initSeats();
                     } else {
                         Toast.makeText(this, "Failed to load seats", Toast.LENGTH_SHORT).show();
-                        initSeats(); // Vẫn vẽ ghế dù lỗi (coi như trống hết)
+                        initSeats();
                     }
                 });
     }
@@ -146,24 +131,18 @@ public class SeatSelectionActivity extends AppCompatActivity {
                 params.setMargins(margin, margin, margin, margin);
                 seatView.setLayoutParams(params);
 
-                // Tạo định danh ghế (Ví dụ: "Row 1 Seat 5") - PHẢI KHỚP FORMAT LÚC LƯU
                 String seatName = "Row " + r + " Seat " + c;
 
-                // --- KIỂM TRA TRẠNG THÁI ---
                 if (bookedSeats.contains(seatName)) {
-                    // GHẾ ĐÃ CÓ NGƯỜI ĐẶT (Occupied)
-                    seatView.setBackgroundResource(R.drawable.bg_seat_occupied); // File hình tròn xám sáng có dấu x
-                    seatView.setEnabled(false); // Không cho bấm
+                    seatView.setBackgroundResource(R.drawable.bg_seat_occupied);
+                    seatView.setEnabled(false);
                 } else {
-                    // GHẾ TRỐNG (Available)
                     seatView.setBackgroundResource(R.drawable.bg_seat_selector);
                     seatView.setSelected(false);
-
                     final int currentRow = r;
                     final int currentCol = c;
                     seatView.setOnClickListener(v -> handleSeatClick(seatView, currentRow, currentCol));
                 }
-
                 gridLayoutSeats.addView(seatView);
             }
         }
@@ -174,7 +153,6 @@ public class SeatSelectionActivity extends AppCompatActivity {
         String seatName = "Row " + row + " Seat " + col;
 
         if (seat.isSelected()) {
-            // Bỏ chọn
             seat.setSelected(false);
             totalTickets--;
 
@@ -186,10 +164,14 @@ public class SeatSelectionActivity extends AppCompatActivity {
             updateButton();
 
         } else {
-            // Chọn mới -> Hỏi loại vé
-            String[] options = {"Adult (" + priceAdult + " ₸)", "Child (" + priceChild + " ₸)"};
+            // Đã đổi Dialog sang Đa ngôn ngữ
+            String[] options = {
+                    getString(R.string.adult) + " (" + priceAdult + " ₸)",
+                    getString(R.string.child) + " (" + priceChild + " ₸)"
+            };
+
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Select Ticket Type");
+            builder.setTitle(getString(R.string.select_ticket_type)); // Lấy tiêu đề từ strings
             builder.setItems(options, (dialog, which) -> {
                 seat.setSelected(true);
                 totalTickets++;
@@ -198,7 +180,7 @@ public class SeatSelectionActivity extends AppCompatActivity {
                 totalPrice += priceToAdd;
 
                 seatPrices.put(seatKey, priceToAdd);
-                selectedSeats.add(seatName); // Lưu tên ghế
+                selectedSeats.add(seatName);
                 updateButton();
             });
             builder.show();
@@ -207,9 +189,12 @@ public class SeatSelectionActivity extends AppCompatActivity {
 
     private void updateButton() {
         if (totalTickets == 0) {
-            btnBuyTicket.setText("Buy tickets • 0 ₸");
+            // "Mua vé • 0 ₸"
+            btnBuyTicket.setText(getString(R.string.buy_tickets) + " • 0 ₸");
         } else {
-            btnBuyTicket.setText("Buy " + totalTickets + " tickets • " + totalPrice + " ₸");
+            // "Mua 2 vé • 5000 ₸" (Ghép chuỗi đa ngôn ngữ)
+            String text = getString(R.string.buy) + " " + totalTickets + " " + getString(R.string.tickets) + " • " + totalPrice + " ₸";
+            btnBuyTicket.setText(text);
         }
     }
 }

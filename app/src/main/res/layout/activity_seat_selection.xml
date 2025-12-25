@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_bg"
@@ -29,19 +30,21 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvCinemaName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Eurasia Cinema7"
+                tools:text="Eurasia Cinema7"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="18sp"/>
+
             <TextView
                 android:id="@+id/tvMovieTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="The Batman"
+                tools:text="The Batman"
                 android:textColor="@color/text_grey"
                 android:textSize="14sp"
                 android:layout_marginTop="2dp"/>
@@ -59,7 +62,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Available"
+            android:text="@string/available"
             android:textSize="12sp"
             android:textColor="@color/text_grey"
             android:layout_marginStart="8dp"
@@ -69,7 +72,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Occupied"
+            android:text="@string/occupied"
             android:textSize="12sp"
             android:textColor="@color/text_grey"
             android:layout_marginStart="8dp"
@@ -79,7 +82,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chosen"
+            android:text="@string/chosen"
             android:textSize="12sp"
             android:textColor="@color/text_grey"
             android:layout_marginStart="8dp"/>
@@ -88,7 +91,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SCREEN"
+        android:text="@string/screen"
         android:gravity="center"
         android:textSize="12sp"
         android:textColor="@color/text_grey"
@@ -126,12 +129,13 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
         android:paddingTop="16dp">
+
         <Button
             android:id="@+id/btnBuyTicket"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:backgroundTint="@color/orange_main"
-            android:text="Buy tickets • 0 ₸"
+            android:text="@string/buy_tickets"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"

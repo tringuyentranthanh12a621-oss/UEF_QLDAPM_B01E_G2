@@ -1,3 +1,99 @@
 <resources>
     <string name="app_name">TicketBookingCinema</string>
+
+    <string name="now_in_cinemas">Now in cinemas</string>
+    <string name="coming_soon">Coming Soon</string>
+    <string name="search_hint">Search movies...</string>
+    <string name="choose_city">Choose City</string>
+    <string name="choose_language">Choose Language</string>
+    <string name="profile">Profile</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_continue">Sign in to continue</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="dont_have_account">Don\'t have an account? Register</string>
+    <string name="already_have_account">Already have an account? Login</string>
+    <string name="login_success">Login Successful</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="tab_about">About</string>
+    <string name="tab_sessions">Sessions</string>
+    <string name="certificate">Certificate</string>
+    <string name="runtime">Runtime</string>
+    <string name="genre">Genre</string>
+    <string name="sort_time">Time ↑</string>
+    <string name="by_cinema">By cinema</string>
+    <string name="header_time">Time</string>
+    <string name="header_adult">Adult</string>
+    <string name="header_child">Child</string>
+    <string name="header_student">Student</string>
+    <string name="select_session">Select session</string>
+    <string name="saved_cards">Saved cards</string>
+    <string name="add_new_card">Add new card</string>
+    <string name="payment_history">Payments history</string>
+    <string name="logout">Log Out</string>
+    <string name="no_booking_history">No booking history found.</string>
+    <string name="pay_for_tickets">Pay for tickets</string>
+    <string name="total_colon">Total:</string>
+    <string name="pay_now">Pay Now</string>
+    <string name="book_ticket">Book Ticket</string>
+    <string name="synopsis">Synopsis</string>
+    <string name="cast">Cast</string>
+    <string name="select_seat">Select Seats</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="total_price">Total Price</string>
+    <string name="checkout">Checkout</string>
+    <string name="available">Available</string>
+    <string name="occupied">Occupied</string>
+    <string name="chosen">Chosen</string>
+    <string name="buy_tickets">Buy tickets</string>
+
+        <string name="screen">SCREEN</string>
+        <string name="select_ticket_type">Select Ticket Type</string>
+        <string name="adult">Adult</string>
+        <string name="child">Child</string>
+        <string name="please_select_seat">Please select at least one seat</string>
+        <string name="buy">Buy</string>
+        <string name="tickets">tickets</string>
+    <string name="admin_dashboard">Admin Dashboard</string>
+    <string name="manage_movies">Manage Movies</string>
+    <string name="manage_users">Manage Users</string>
+    <string name="add_movie">Add Movie</string>
+    <string name="save_movie">Save Movie</string>
+    <string name="delete_movie">Delete Movie</string>
+
+        <string name="your_eticket">Your E-Ticket</string>
+        <string name="show_code">Show this code at the entrance</string>
+        <string name="cinema">Cinema</string>
+        <string name="date_time">Date &amp; Time</string>
+        <string name="seats">Seats</string>
+        <string name="back_home">Back to Home</string>
+        <string name="cancel_booking">Cancel Booking</string>
+        <string name="ticket_saved">Ticket saved!</string>
+
+        <string name="title_add_card">Add new card</string>
+        <string name="card_number">Card Number</string>
+        <string name="card_holder_name">Card Holder Name</string>
+        <string name="expiry_date">Expiry Date</string>
+        <string name="cvv">CVV</string>
+        <string name="btn_add_card">Add Card</string>
+
+        <string name="title_card_detail">Card Details</string>
+        <string name="label_card_holder">Card Holder</string>
+        <string name="label_expires">Expires</string>
+        <string name="btn_remove_card">Remove Card</string>
+        <string name="msg_card_removed">Card removed successfully</string>
+        <string name="hint_full_name">FULL NAME</string>
+
+        <string name="error_load_history">Failed to load history</string>
+        <string name="fill_all_fields">Please fill all fields</string>
+        <string name="password_mismatch">Passwords do not match</string>
+        <string name="password_length_error">Password must be at least 6 characters</string>
+        <string name="account_created">Account created successfully!</string>
+        <string name="error_save_user">Error saving user data: </string>
+        <string name="reg_failed">Registration failed: </string>
+
 </resources>

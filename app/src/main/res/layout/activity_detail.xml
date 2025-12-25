@@ -57,7 +57,7 @@
                     android:id="@+id/tvTabAbout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="About"
+                    android:text="@string/tab_about"
                     android:textColor="@color/orange_main"
                     android:textStyle="bold"
                     android:padding="12dp"/>
@@ -81,7 +81,7 @@
                     android:id="@+id/tvTabSessions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sessions"
+                    android:text="@string/tab_sessions"
                     android:textColor="@color/text_grey"
                     android:padding="12dp"/>
                 <View
@@ -119,7 +119,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/the_batman" />
+                        android:src="@drawable/ic_launcher_background" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -204,13 +204,14 @@
                         android:layout_height="wrap_content"
                         android:columnCount="2"
                         android:layout_marginTop="20dp">
-                        <TextView android:text="Certificate" android:textColor="@color/text_grey" android:width="100dp" android:layout_marginBottom="12dp"/>
+
+                        <TextView android:text="@string/certificate" android:textColor="@color/text_grey" android:width="100dp" android:layout_marginBottom="12dp"/>
                         <TextView android:text="16+" android:textColor="@color/white" android:background="@drawable/bg_input_field" android:paddingHorizontal="8dp" android:paddingVertical="2dp"/>
 
-                        <TextView android:text="Runtime" android:textColor="@color/text_grey" android:layout_marginBottom="12dp"/>
+                        <TextView android:text="@string/runtime" android:textColor="@color/text_grey" android:layout_marginBottom="12dp"/>
                         <TextView android:id="@+id/tvDetailDuration" android:text="02:56" android:textColor="@color/white"/>
 
-                        <TextView android:text="Genre" android:textColor="@color/text_grey" android:layout_marginBottom="12dp"/>
+                        <TextView android:text="@string/genre" android:textColor="@color/text_grey" android:layout_marginBottom="12dp"/>
                         <TextView android:id="@+id/tvDetailGenre" android:text="Action" android:textColor="@color/white"/>
                     </GridLayout>
                 </LinearLayout>
@@ -241,17 +242,17 @@
                         android:background="?attr/selectableItemBackground"
                         android:layout_height="wrap_content">
                         <ImageView android:src="@android:drawable/ic_menu_my_calendar" app:tint="#8C8C8C" android:layout_width="20dp" android:layout_height="20dp"/>
-                        <TextView android:id="@+id/tvDateFilter" android:text="April, 18" android:textColor="@color/white" android:textSize="12sp" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:id="@+id/tvDateFilter" android:text="Select Date" android:textColor="@color/white" android:textSize="12sp" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
                     </LinearLayout>
 
                     <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:layout_height="wrap_content">
                         <ImageView android:src="@android:drawable/ic_menu_sort_by_size" app:tint="#8C8C8C" android:layout_width="20dp" android:layout_height="20dp"/>
-                        <TextView android:text="Time ↑" android:textColor="@color/white" android:textSize="12sp" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:text="@string/sort_time" android:textColor="@color/white" android:textSize="12sp" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
                     </LinearLayout>
 
                     <LinearLayout android:layout_width="0dp" android:layout_weight="1" android:orientation="vertical" android:gravity="center" android:layout_height="wrap_content">
                         <Switch android:layout_width="wrap_content" android:layout_height="20dp" android:checked="false"/>
-                        <TextView android:text="By cinema" android:textColor="@color/white" android:textSize="12sp" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                        <TextView android:text="@string/by_cinema" android:textColor="@color/white" android:textSize="12sp" android:layout_marginTop="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -261,69 +262,23 @@
                     android:orientation="horizontal"
                     android:background="#25293E"
                     android:paddingVertical="8dp">
-                    <TextView android:text="Time" android:textColor="#5A6076" android:textSize="12sp" android:gravity="center" android:layout_width="0dp" android:layout_weight="1.2" android:layout_height="wrap_content"/>
-                    <TextView android:text="Adult" android:textColor="#5A6076" android:textSize="12sp" android:gravity="center" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"/>
-                    <TextView android:text="Child" android:textColor="#5A6076" android:textSize="12sp" android:gravity="center" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"/>
-                    <TextView android:text="Student" android:textColor="#5A6076" android:textSize="12sp" android:gravity="center" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"/>
+                    <TextView android:text="@string/header_time" android:textColor="#5A6076" android:textSize="12sp" android:gravity="center" android:layout_width="0dp" android:layout_weight="1.2" android:layout_height="wrap_content"/>
+                    <TextView android:text="@string/header_adult" android:textColor="#5A6076" android:textSize="12sp" android:gravity="center" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"/>
+                    <TextView android:text="@string/header_child" android:textColor="#5A6076" android:textSize="12sp" android:gravity="center" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"/>
+                    <TextView android:text="@string/header_student" android:textColor="#5A6076" android:textSize="12sp" android:gravity="center" android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"/>
                     <TextView android:text="VIP" android:textColor="#5A6076" android:textSize="12sp" android:gravity="center" android:layout_width="0dp" android:layout_weight="0.8" android:layout_height="wrap_content"/>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/itemSession1"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvShowtimes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="16dp"
-                    android:gravity="center_vertical"
                     android:layout_marginTop="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_session_item_selector">
+                    android:nestedScrollingEnabled="false"/>
 
-                    <LinearLayout android:layout_width="0dp" android:layout_weight="1.2" android:orientation="vertical" android:gravity="center" android:layout_height="wrap_content">
-                        <TextView android:text="14:40" android:textColor="@color/white" android:textSize="18sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <TextView android:text="Pyc" android:textColor="#5A6076" android:textSize="12sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                    </LinearLayout>
+                <View android:layout_width="match_parent" android:layout_height="80dp"/>
 
-                    <LinearLayout android:layout_width="0dp" android:layout_weight="3.8" android:orientation="vertical" android:paddingStart="8dp" android:layout_height="wrap_content">
-                        <TextView android:text="Eurasia Cinema7" android:textColor="@color/white" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="4dp">
-                            <TextView android:text="2200 ₸" android:textColor="#C0C0C0" android:textSize="13sp" android:layout_marginEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                            <TextView android:text="1000 ₸" android:textColor="#C0C0C0" android:textSize="13sp" android:layout_marginEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                            <TextView android:text="1500 ₸" android:textColor="#C0C0C0" android:textSize="13sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/itemSession2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingVertical="16dp"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="10dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="@drawable/bg_session_item_selector">
-
-                    <LinearLayout android:layout_width="0dp" android:layout_weight="1.2" android:orientation="vertical" android:gravity="center" android:layout_height="wrap_content">
-                        <TextView android:text="15:10" android:textColor="@color/white" android:textSize="18sp" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <TextView android:text="IMAX Pyc" android:textColor="#5A6076" android:textSize="12sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                    </LinearLayout>
-
-                    <LinearLayout android:layout_width="0dp" android:layout_weight="3.8" android:orientation="vertical" android:paddingStart="8dp" android:layout_height="wrap_content">
-                        <TextView android:text="Kinopark 8 IMAX" android:textColor="@color/white" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="4dp">
-                            <TextView android:text="3500 ₸" android:textColor="#C0C0C0" android:textSize="13sp" android:layout_marginEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                            <TextView android:text="1500 ₸" android:textColor="#C0C0C0" android:textSize="13sp" android:layout_marginEnd="12dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                            <TextView android:text="2500 ₸" android:textColor="#C0C0C0" android:textSize="13sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout> <View android:layout_width="match_parent" android:layout_height="80dp"/>
-
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -332,7 +287,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="16dp"
-        android:text="Select session"
+        android:text="@string/select_session"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"

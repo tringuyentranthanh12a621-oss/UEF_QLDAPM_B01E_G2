@@ -8,16 +8,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager; // Import mới
-import androidx.recyclerview.widget.RecyclerView; // Import mới
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot; // Import mới
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.util.ArrayList; // Import mới
-import java.util.List; // Import mới
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -25,7 +25,6 @@ public class ProfileActivity extends AppCompatActivity {
     FirebaseFirestore db;
     TextView tvName, tvEmail;
 
-    // --- THÊM BIẾN CHO RECYCLERVIEW ---
     RecyclerView rvBookingHistory;
     BookingAdapter bookingAdapter;
     List<Booking> bookingList;
@@ -40,11 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         tvName = findViewById(R.id.tvProfileName);
         tvEmail = findViewById(R.id.tvProfileEmail);
-
-        // --- ÁNH XẠ RECYCLERVIEW ---
         rvBookingHistory = findViewById(R.id.rvBookingHistory);
 
-        // Setup RecyclerView
         bookingList = new ArrayList<>();
         bookingAdapter = new BookingAdapter(bookingList);
         rvBookingHistory.setLayoutManager(new LinearLayoutManager(this));
@@ -56,7 +52,7 @@ public class ProfileActivity extends AppCompatActivity {
         View cardVisa = findViewById(R.id.cardVisa);
 
         loadUserProfile();
-        loadBookingHistory(); // --- GỌI HÀM TẢI LỊCH SỬ ---
+        loadBookingHistory();
 
         btnBack.setOnClickListener(v -> finish());
 
@@ -82,7 +78,6 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void loadUserProfile() {
-        // ... (Giữ nguyên code cũ của bạn) ...
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             String userId = currentUser.getUid();
@@ -99,13 +94,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    // --- HÀM MỚI: TẢI LỊCH SỬ ĐẶT VÉ ---
     private void loadBookingHistory() {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             String userId = currentUser.getUid();
-
-            // Tìm trong collection "bookings" những vé có userId trùng với người đang đăng nhập
             db.collection("bookings")
                     .whereEqualTo("userId", userId)
                     .get()
@@ -113,14 +105,13 @@ public class ProfileActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             bookingList.clear();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                // Chuyển đổi dữ liệu về Object Booking
                                 Booking booking = document.toObject(Booking.class);
                                 bookingList.add(booking);
                             }
-                            // Cập nhật giao diện
                             bookingAdapter.notifyDataSetChanged();
                         } else {
-                            Toast.makeText(this, "Failed to load history", Toast.LENGTH_SHORT).show();
+                            // --- CẬP NHẬT: Dùng getString() thay vì text cứng ---
+                            Toast.makeText(this, getString(R.string.error_load_history), Toast.LENGTH_SHORT).show();
                         }
                     });
         }

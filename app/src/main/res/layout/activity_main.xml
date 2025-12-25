@@ -20,6 +20,7 @@
             android:src="@drawable/logo"
             android:background="@drawable/bg_input_field"
             android:backgroundTint="#808080"/>
+
         <LinearLayout
             android:id="@+id/layoutLocation"
             android:layout_width="wrap_content"
@@ -33,6 +34,7 @@
                 android:layout_height="16dp"
                 android:src="@android:drawable/ic_menu_mylocation"
                 app:tint="#8C8C8C"/>
+
             <TextView
                 android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
@@ -73,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:backgroundTint="@color/orange_main"
-            android:text="Profile"
+            android:text="@string/profile"
             android:textAllCaps="false"
             android:textSize="12sp"
             android:textColor="@color/white"
@@ -98,7 +100,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Now in cinemas"
+                android:text="@string/now_in_cinemas"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
@@ -120,7 +122,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/bg_input_field"
             android:backgroundTint="#25293E"
-            android:hint="Type movie name..."
+            android:hint="@string/search_hint"
             android:textColorHint="#8C8C8C"
             android:textColor="@color/white"
             android:paddingHorizontal="12dp"
@@ -135,5 +137,14 @@
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerTitle"/>
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:indeterminateTint="@color/orange_main"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="@color/dark_bg">
+
+    <TextView
+        android:id="@+id/tvHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Showtime"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:id="@+id/edtShowDate"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Date (e.g. 25/12)"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_input_field"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/edtShowTime"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Time (e.g. 19:30)"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_input_field"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/edtCinemaName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Cinema Name"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_input_field"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <EditText
+        android:id="@+id/edtPrice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Price (e.g. 2000)"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_input_field"
+        android:padding="10dp"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/btnAddShowtime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Showtime"
+        android:backgroundTint="@color/orange_main"/>
+
+</LinearLayout>

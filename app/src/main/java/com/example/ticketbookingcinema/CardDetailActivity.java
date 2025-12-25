@@ -16,16 +16,17 @@ public class CardDetailActivity extends AppCompatActivity {
         Button btnRemove = findViewById(R.id.btnRemoveCard);
         ImageView btnBack = findViewById(R.id.btnBackCardDetail);
 
-        // 2. Xử lý sự kiện nút Back (Quay lại Profile)
+        // 2. Xử lý sự kiện nút Back
         btnBack.setOnClickListener(v -> finish());
 
         // 3. Xử lý sự kiện xóa thẻ
         btnRemove.setOnClickListener(v -> {
-            // Ở đây bạn có thể thêm code xóa dữ liệu khỏi Firebase nếu cần
-            // db.collection("users").document(uid).collection("cards").document(cardId).delete()...
+            // ... code xóa Firebase ...
 
-            Toast.makeText(this, "Card removed successfully", Toast.LENGTH_SHORT).show();
-            finish(); // Đóng màn hình này lại
+            // SỬA: Dùng getString để hỗ trợ Đa ngôn ngữ
+            Toast.makeText(this, getString(R.string.msg_card_removed), Toast.LENGTH_SHORT).show();
+
+            finish();
         });
     }
 }

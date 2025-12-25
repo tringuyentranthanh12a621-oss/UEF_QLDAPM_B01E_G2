@@ -45,26 +45,37 @@ public class OrderConfirmationActivity extends AppCompatActivity {
 
         // 2. Ánh xạ View
         TextView tvTitle = findViewById(R.id.tvOrderMovieTitle);
-        TextView tvCinema = findViewById(R.id.tvOrderCinema); // Cần thêm ID này trong XML nếu muốn hiện
-        TextView tvDate = findViewById(R.id.tvOrderDate);     // Cần thêm ID này trong XML nếu muốn hiện
+        TextView tvCinema = findViewById(R.id.tvOrderCinema);
+        TextView tvDate = findViewById(R.id.tvOrderDate);
         TextView tvSeats = findViewById(R.id.tvOrderSeats);
         TextView tvTotal = findViewById(R.id.tvOrderTotal);
         Button btnPay = findViewById(R.id.btnFinalPay);
+
+        // Nút Back
+        findViewById(R.id.btnBackConfirm).setOnClickListener(v -> finish());
 
         // 3. Hiển thị dữ liệu
         if(movieTitle != null) tvTitle.setText(movieTitle);
         if(cinemaName != null && tvCinema != null) tvCinema.setText(cinemaName);
         if(date != null && time != null && tvDate != null) tvDate.setText(date + " • " + time);
 
-        tvTotal.setText("Total: " + totalPrice + " ₸");
-        btnPay.setText("Pay • " + totalPrice + " ₸");
+        // --- CẬP NHẬT ĐA NGÔN NGỮ TẠI ĐÂY ---
 
+        // Hiển thị Tổng tiền (Dùng R.string.total_colon)
+        // Ví dụ: "Tổng cộng: 5000 ₸" hoặc "Total: 5000 ₸"
+        tvTotal.setText(getString(R.string.total_colon) + " " + totalPrice + " ₸");
+
+        // Hiển thị Nút thanh toán (Dùng R.string.pay_now)
+        // Ví dụ: "Thanh toán ngay • 5000 ₸"
+        btnPay.setText(getString(R.string.pay_now) + " • " + totalPrice + " ₸");
+
+        // Hiển thị Ghế ngồi (Dùng R.string.seats)
+        // Ví dụ: "Số ghế: A1, A2"
         if (seats != null) {
-            tvSeats.setText("Seats: " + seats.toString().replace("[", "").replace("]", ""));
+            String seatList = seats.toString().replace("[", "").replace("]", "");
+            tvSeats.setText(getString(R.string.seats) + ": " + seatList);
         }
-
-        // Nút Back
-        findViewById(R.id.btnBackConfirm).setOnClickListener(v -> finish());
+        // -------------------------------------
 
         // 4. Xử lý nút Pay -> Lưu vào Firestore
         btnPay.setOnClickListener(v -> saveBookingToFirestore());
@@ -83,11 +94,11 @@ public class OrderConfirmationActivity extends AppCompatActivity {
         booking.put("userId", userId);
         booking.put("movieTitle", movieTitle);
         booking.put("cinemaName", cinemaName);
-        booking.put("bookingDate", date); // Quan trọng: Khớp tên trường với logic check ghế
-        booking.put("time", time);        // Quan trọng: Khớp tên trường với logic check ghế
-        booking.put("seats", seats);      // Lưu mảng ghế
+        booking.put("bookingDate", date);
+        booking.put("time", time);
+        booking.put("seats", seats);
         booking.put("totalPrice", totalPrice);
-        booking.put("timestamp", new Date()); // Thời gian đặt vé thực tế
+        booking.put("timestamp", new Date());
 
         // Lưu vào Collection "bookings"
         db.collection("bookings")
@@ -103,6 +114,7 @@ public class OrderConfirmationActivity extends AppCompatActivity {
                     intent.putExtra("date", date);
                     intent.putExtra("time", time);
                     intent.putExtra("seats", seats);
+                    intent.putExtra("totalPrice", totalPrice); // Truyền thêm giá tiền nếu cần
 
                     // Xóa back stack để user không back lại màn hình thanh toán được
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

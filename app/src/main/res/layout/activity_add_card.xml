@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add new card"
+        android:text="@string/title_add_card"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -38,7 +38,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Card Number"
+            android:text="@string/card_number"
             android:textColor="@color/text_grey"
             android:layout_marginBottom="8dp"/>
         <EditText
@@ -57,16 +57,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Card Holder Name"
+            android:text="@string/card_holder_name"
             android:textColor="@color/text_grey"
             android:layout_marginBottom="8dp"/>
+
         <EditText
             android:id="@+id/edtCardHolder"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/bg_input_field"
             android:backgroundTint="#25293E"
-            android:hint="FULL NAME"
+            android:hint="@string/hint_full_name"
             android:textColor="@color/white"
             android:textColorHint="#505050"
             android:paddingHorizontal="16dp"
@@ -87,7 +88,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Expiry Date"
+                    android:text="@string/expiry_date"
                     android:textColor="@color/text_grey"
                     android:layout_marginBottom="8dp"/>
                 <EditText
@@ -112,7 +113,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CVV"
+                    android:text="@string/cvv"
                     android:textColor="@color/text_grey"
                     android:layout_marginBottom="8dp"/>
                 <EditText
@@ -136,7 +137,7 @@
         android:id="@+id/btnConfirmAddCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Card"
+        android:text="@string/btn_add_card"
         android:textColor="@color/white"
         android:backgroundTint="@color/orange_main"
         android:textStyle="bold"

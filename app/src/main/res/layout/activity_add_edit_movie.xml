@@ -98,16 +98,41 @@
         <EditText
             android:id="@+id/edtDescription"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:background="@drawable/bg_input_field"
             android:backgroundTint="#25293E"
-            android:hint="Movie Description..."
+            android:hint="Description (English)..."
             android:textColor="@color/white"
             android:textColorHint="#505050"
             android:padding="16dp"
             android:gravity="top"
             android:layout_marginTop="12dp"/>
 
+        <EditText
+            android:id="@+id/edtDescriptionVi"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_input_field"
+            android:backgroundTint="#25293E"
+            android:hint="Mô tả (Tiếng Việt)..."
+            android:textColor="@color/white"
+            android:textColorHint="#505050"
+            android:padding="16dp"
+            android:gravity="top"
+            android:layout_marginTop="12dp"/>
+
+        <EditText
+            android:id="@+id/edtDescriptionRu"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/bg_input_field"
+            android:backgroundTint="#25293E"
+            android:hint="Описание (Russian)..."
+            android:textColor="@color/white"
+            android:textColorHint="#505050"
+            android:padding="16dp"
+            android:gravity="top"
+            android:layout_marginTop="12dp"/>
         <Button
             android:id="@+id/btnSaveMovie"
             android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_bg"
@@ -20,10 +21,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/white"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your E-Ticket"
+            android:text="@string/your_eticket"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -50,7 +52,7 @@
                     android:id="@+id/tvTicketMovieTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Movie Title"
+                    tools:text="The Batman"
                     android:textColor="@color/white"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -67,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Show this code at the entrance"
+                    android:text="@string/show_code"
                     android:textColor="@color/text_grey"
                     android:textSize="12sp"
                     android:layout_marginTop="8dp"/>
@@ -92,13 +94,13 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Cinema"
+                            android:text="@string/cinema"
                             android:textColor="@color/text_grey"/>
                         <TextView
                             android:id="@+id/tvTicketCinema"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Eurasia Cinema7"
+                            tools:text="Eurasia Cinema7"
                             android:textColor="@color/white"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -112,13 +114,13 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Date &amp; Time"
+                            android:text="@string/date_time"
                             android:textColor="@color/text_grey"/>
                         <TextView
                             android:id="@+id/tvTicketDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="18/04 • 14:40"
+                            tools:text="18/04 • 14:40"
                             android:textColor="@color/white"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -131,13 +133,13 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Seats"
+                            android:text="@string/seats"
                             android:textColor="@color/text_grey"/>
                         <TextView
                             android:id="@+id/tvTicketSeats"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Row 4 Seat 5"
+                            tools:text="Row 4 Seat 5"
                             android:textColor="@color/orange_main"
                             android:textStyle="bold"/>
                     </LinearLayout>
@@ -158,7 +160,7 @@
                 android:id="@+id/btnHome"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Back to Home"
+                android:text="@string/back_home"
                 android:backgroundTint="@color/orange_main"
                 android:textColor="@color/white"
                 android:textStyle="bold"
@@ -169,7 +171,7 @@
                 android:id="@+id/btnRefund"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Cancel Booking"
+                android:text="@string/cancel_booking"
                 android:backgroundTint="#3A3F58"
                 android:textColor="@color/text_grey"
                 app:cornerRadius="12dp"/>
